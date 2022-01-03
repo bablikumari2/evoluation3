@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header {
+    height: 80px ;
+    background: orangered;
+
+}
+
+#navbar {
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15%;
+}
+
+#navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+body {
+    background-image: url("https://www.foodsafety.gov/sites/default/files/styles/og_image_style/public/2019-05/Keep%20Food%20Safe.jpg?h=a4d068ee&itok=1SFsheMq");
+    background-size: cover;
+}
+
+#container {
+    width: 35%;
+    height: 400px;
+    margin:5% auto; ;
+    background-color: white;
+}
+#container form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+form h1 {
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    color: white;
+    background-color: orangered
+}
+
+form input {
+    width: 80%;
+    height:28px;
+    font-size:16px;
+    padding: 5px;
+}

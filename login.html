@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodiee Junction</title>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="https://www.pngitem.com/pimgs/m/161-1610568_foodies-logo-copy-small-foodies-logo-hd-png.png">
+</head>
+<body>
+    <header>
+        <header>
+            <div id="nav">
+                <a href="./menu.html">MENU</a>
+                <a href="./login.html">LOGIN</a>
+                <a href="./signup.html">SIGNUP</a>
+            </div>
+        </header>
+    </header>
+
+    <div id="container"> 
+        <form onsubmit="login(event)" id="login-form">
+         <h1>Log In</h1>
+         <input type="email" id="email" placeholder="Email" required/>
+         <input type="password" id="password" placeholder="Password" required/>
+         <input type="submit" />
+         <p>Don't have an account <a href="signup.html">Sign Up</a> </p>
+     </form>
+        
+     </div>
+ 
+</body>
+</html>
+
+<script>
+   
+  function login(e) {
+    e.preventDefault();
+
+    let form = document.getElementById("login-form");
+
+    let user_data = {
+      username: form.email.value,
+      password: form.password.value,
+    };
+
+    let data_to_send = JSON.stringify(user_data);
+
+    fetch("https://masai-api-mocker.herokuapp.com/auth/login", {
+      method: "POST",
+
+      body: data_to_send,
+
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        console.log("res:", res);
+        alert(res.message);
+        fetchData(user_data.username,res.token);
+
+      })
+      .catch((err) => {
+        console.log("err:", err);
+      });
+  }
+
+function fetchData(username,token) {
+
+fetch(`https://masai-api-mocker.herokuapp.com/user/${username}`,{
+    headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+    },
+})
+.then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        console.log("res:", res);
+      })
+      .catch((err) => {
+        console.log("err:", err);
+      });
+}
+</script>

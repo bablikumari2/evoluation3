@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+    <!-- --navbar-- -->
+    <header>
+        <div id="nav">
+            <a href="./menu.html">MENU</a>
+            <a href="./login.html">LOGIN</a>
+            <a href="./signup.html">SIGNUP</a>
+        </div>
+    </header>
+
+    <div id="display"></div>
+</body>
+</html>
+<script>
+    let display = document.getElementById("display");
+
+    async function dishes(){
+        let res = await fetch("https://www.themealdb.com/api/json/v1/1/categories.php")
+
+        let data = await res.json();
+      append(data.categories);
+        console.log(data)
+    }
+ dishes()
+
+    function append(dishs){
+        dishs.forEach((item) => {
+        var div = document.createElement("div");
+        var img = document.createElement("img")
+        img.src = item.strCategoryThumb;
+
+        var dish = document.createElement("h3")
+        dish.innerHTML=item.strCategory;
+
+        var price = document.createElement("p")
+        price.innerHTML = Math.random()*500
+
+        var btn = document.createElement("button")
+        btn.innerText ="Add to Cart"
+        btn.setAttribute("onclick","gotocart()")
+
+        div.append(img,dish,price,btn)
+        display.append(div)
+    
+        });
+    }
+   function gotocart(){
+       window.location.href="cart.html"
+   }
+    
+</script>
